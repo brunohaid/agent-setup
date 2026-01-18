@@ -14,9 +14,10 @@ Reflect on what was learned and accomplished in this session:
 3. **Learn from mistakes**:
    - If you struggled, made multiple failed attempts, or hit unexpected bugs, identify the root cause
    - Distill this into a brief lesson: what assumption was wrong? What should you check first next time?
-   - Add to AGENTS.md if it's a project-specific pattern, or mention it in your summary so the user can decide
+   - Add to AGENTS.md if it's a project-specific pattern, or any approriate additional agent md files the project might have, or mention it in your summary so the user can decide
 
-4. **AGENTS.md**:
+4. **Agent documentation** (AGENTS.md and auto-loaded context files):
+   - Review all context files that were loaded at session start - can any be improved based on this session?
    - Update if there's a new convention, gotcha, or pattern that should apply across all future sessions
    - Examples: "always check X before Y", "this codebase does Z differently", "avoid approach W because..."
    - Be conservative - keep it focused
