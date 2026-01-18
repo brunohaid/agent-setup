@@ -16,6 +16,12 @@ Skills and prompts for [pi](https://github.com/mariozechner/pi-coding-agent).
 |--------|-------------|
 | [reflect](prompts/reflect.md) | End-of-session reflection - update docs and handovers |
 
+### Extensions
+
+| Extension | Description |
+|-----------|-------------|
+| [autoload-context](extensions/autoload-context.ts) | Auto-load `docs/agents/context/*.md` files into system prompt |
+
 ## Installation
 
 ### Skills
