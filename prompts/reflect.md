@@ -9,7 +9,8 @@ Reflect on what was learned and accomplished in this session:
 2. **Handover files** (if the project has a handovers directory):
    - Update existing handover files if you made progress on that work
    - List everything you tried and why it failed if the work is still ongoing/unresolved, keep it short and spot on
-   - Remove handover files for work that is now complete
+   - For completed work: suggest archiving to user, then move to `completed/` subdirectory when confirmed
+   - Add timestamps: `Started: YYYY-MM-DD` when creating, `Completed: YYYY-MM-DD` when archiving
    - Only create a NEW handover if there's complex incomplete work that would be hard to continue without context (rare - maybe 1 in 20 sessions)
 
 3. **Learn from mistakes**:
@@ -26,7 +27,8 @@ Reflect on what was learned and accomplished in this session:
    - Be conservative - keep it focused
 
 5. **Reference files** (loaded on demand, usually in docs/agents/reference):
-   - Check if you learned something new about a topic for which there is a reference file, and if yes improve the reference file with your new knowledge.
+   - List the directory, then check if any file relates to this session's topic
+   - If yes, update it with your new knowledge
 
 Summarize what you're updating and why. If nothing needs updating, say so.
 
