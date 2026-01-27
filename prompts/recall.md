@@ -7,7 +7,7 @@ Search for relevant knowledge we've already captured but didn't autoload into th
 
 2. **Search with context**:
    ```bash
-   rg -i -C 10 "<term>" docs/agents/
+   grep -ri -C 10 "<term>" docs/agents/
    ```
    This shows 10 lines around each match - enough to understand without loading entire files.
 
