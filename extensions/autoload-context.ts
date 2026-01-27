@@ -31,11 +31,12 @@ export default function (pi: ExtensionAPI) {
 
 		contextContent = contents.join("\n\n");
 
-		// Show loaded files (bold filenames stand out from dim notify wrapper)
-		const bold = "\x1b[1m";
-		const reset = "\x1b[0m";
-		const fileNames = files.join(", ");
-		ctx.ui.notify(`Loaded ${files.length} context file(s): ${bold}${fileNames}${reset}`, "info");
+		// Show loaded files with theme colors
+		const theme = ctx.ui.theme;
+		const headline = theme.fg("mdHeading", "[Auto-loaded Context]");
+		const count = theme.fg("accent", `${files.length}`);
+		const fileNames = files.map(f => theme.fg("success", f)).join(theme.fg("dim", ", "));
+		ctx.ui.notify(`\b${headline}\n  Loaded ${count} context file(s): ${fileNames}\n`, "plain");
 	});
 
 	// Append to system prompt before each LLM call
