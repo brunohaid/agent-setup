@@ -8,6 +8,7 @@ Reflect on what was learned and accomplished in this session:
 
 2. **Handover files** (if the project has a handovers directory):
    - Update existing handover files if you made progress on that work
+   - **Never update handovers in `completed/` subdirectory** - those are archived historical records
    - List everything you tried and why it failed if the work is still ongoing/unresolved, keep it short and spot on
    - For completed work: suggest archiving to user, then move to `completed/` subdirectory when confirmed
    - Add timestamps: `Started: YYYY-MM-DD` when creating, `Completed: YYYY-MM-DD` when archiving
