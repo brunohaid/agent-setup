@@ -20,8 +20,9 @@ Reflect on what was learned and accomplished in this session:
 4. **Handover files** (if the project has a handovers directory):
    - Update existing handover files if you made progress on that work
    - **Never update handovers in `completed/` subdirectory** - those are archived historical records
-   - List everything you tried and why it failed if the work is still ongoing/unresolved, keep it short and spot on
-   - For completed work: suggest archiving to user, then move to `completed/` subdirectory when confirmed
+   - **Evolve, don't overwrite**: Update understanding as you learn, but preserve what was tried and why it failed/worked. The handover should reflect current knowledge while keeping a record of the problem-solving journey. The final handover should tell the full story: what was tried, what failed, what worked.
+   - For ongoing work: document what was tried this session, what worked/failed, current state
+   - For completed work: ensure the handover captures the journey, then suggest archiving to user (use `git mv` to move to `completed/`)
    - Timestamps: `Started: YYYY-MM-DD` when creating, `Updated: YYYY-MM-DD` when modifying, `Completed: YYYY-MM-DD` when archiving
    - Only create a NEW handover if there's complex incomplete work that would be hard to continue without context (rare - maybe 1 in 20 sessions)
 
