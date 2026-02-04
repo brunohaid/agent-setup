@@ -25,6 +25,7 @@ Skills and prompts for [pi](https://github.com/mariozechner/pi-coding-agent).
 | Extension | Description |
 |-----------|-------------|
 | [autoload-context](extensions/autoload-context.ts) | Auto-load `docs/agents/context/*.md` files into system prompt |
+| [self-update](extensions/self-update.ts) | Update pi and restart with current session via `/update` command |
 
 ## Installation
 
@@ -57,6 +58,15 @@ ln -s ~/agent-setup/prompts/*.md ~/.pi/agent/prompts/
 
 Or symlink individually / copy them directly if you prefer.
 
+### Extensions
+
+Symlink extensions to your pi extensions directory:
+
+```bash
+mkdir -p ~/.pi/agent/extensions
+ln -s ~/agent-setup/extensions/*.ts ~/.pi/agent/extensions/
+```
+
 ## Usage
 
 ### PDF Skill
@@ -76,3 +86,7 @@ Requires `pdftotext` (install via `brew install poppler` on macOS).
 - `/recall` - Search for relevant past learnings
 - `/reflect` - End-of-session reflection and doc updates
 - `/weigh` - Propose 3 solutions with pros and cons for current discussion
+
+### Self-Update
+
+Run `/update` to update pi to the latest version and automatically restart with your current session. No manual restart required.

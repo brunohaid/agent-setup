@@ -10,6 +10,7 @@ Search for relevant knowledge we've already captured but didn't autoload into th
    grep -ri -C 10 "<term>" docs/agents/
    ```
    This shows 10 lines around each match - enough to understand without loading entire files.
+   Also searches journal/ for recent session summaries if that directory exists.
 
 3. **Scan results for**:
    - What was tried before and why it failed
