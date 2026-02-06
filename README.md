@@ -25,6 +25,7 @@ Skills and prompts for [pi](https://github.com/mariozechner/pi-coding-agent).
 | Extension | Description |
 |-----------|-------------|
 | [autoload-context](extensions/autoload-context.ts) | Auto-load `docs/agents/context/*.md` files into system prompt |
+| [noop](extensions/noop.ts) | Plan without implementing - prefix prompts with `/noop` to get a plan instead of changes |
 | [self-update](extensions/self-update.ts) | Update pi and restart with current session via `/update` command |
 
 ## Installation
@@ -86,6 +87,17 @@ Requires `pdftotext` (install via `brew install poppler` on macOS).
 - `/recall` - Search for relevant past learnings
 - `/reflect` - End-of-session reflection and doc updates
 - `/weigh` - Propose 3 solutions with pros and cons for current discussion
+
+### Noop (Plan Mode)
+
+Prefix any prompt with `/noop` to get a detailed plan instead of immediate implementation:
+
+```
+/noop Add caching to the API endpoints
+/noop Refactor the database connection pooling
+```
+
+The agent will describe what files it would modify and what changes it would make, without actually making them. Useful for reviewing proposed changes before committing to them.
 
 ### Self-Update
 

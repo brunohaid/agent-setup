@@ -23,3 +23,5 @@ Search for relevant knowledge we've already captured but didn't autoload into th
 5. **Report**: Briefly summarize what applies to the current task. If nothing relevant, say so and continue.
 
 This avoids re-learning lessons the hard way or repeating failed approaches.
+
+$@

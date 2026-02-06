@@ -42,3 +42,5 @@ Reflect on what was learned and accomplished in this session:
 Summarize what you're updating and why. If nothing needs updating, say so.
 
 **Do NOT commit or push changes. Just report what you updated.**
+
+$@
