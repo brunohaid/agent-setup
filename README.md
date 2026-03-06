@@ -16,6 +16,7 @@ Skills and prompts for [pi](https://github.com/mariozechner/pi-coding-agent).
 |--------|-------------|
 | [familiarize](prompts/familiarize.md) | Get oriented with a new codebase |
 | [improve](prompts/improve.md) | Suggest structural improvements to docs/agents organization |
+| [plan](prompts/plan.md) | Draft implementation plan as a first-draft handover for the next session |
 | [polish](prompts/polish.md) | Review session code changes for style and DRY |
 | [recall](prompts/recall.md) | Search for relevant past learnings not loaded at session start |
 | [reflect](prompts/reflect.md) | End-of-session reflection - update docs and handovers |
@@ -85,6 +86,7 @@ Requires `pdftotext` (install via `brew install poppler` on macOS).
 
 - `/familiarize` - Get oriented with a new codebase
 - `/improve` - Suggest improvements to docs/agents organization
+- `/plan` - Draft implementation plan as a first-draft handover for the next session
 - `/polish` - Review session code for style compliance and DRY
 - `/recall` - Search for relevant past learnings
 - `/reflect` - End-of-session reflection and doc updates
