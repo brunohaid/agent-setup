@@ -17,18 +17,22 @@ pdftotext -f 1 -l 5 "file.pdf" -  # pages 1-5 only
 
 ## Installation
 
-If `pdftotext` is missing:
+Core tools (`pdftotext`, `pdftoppm`, `pdfimages`) all come from **poppler**:
 ```bash
-brew install poppler  # macOS
+brew install poppler       # macOS
 apt install poppler-utils  # Linux
 ```
 
-## Advanced: pdfplumber
-
-For tables, bounding boxes, or precise layout control, use pdfplumber:
-
+Optional — for tables, bounding boxes, or precise layout control:
 ```bash
 pip install pdfplumber
+```
+
+Optional — for OCR of scanned/image-based PDFs:
+```bash
+brew install tesseract ocrmypdf   # macOS
+apt install tesseract-ocr ocrmypdf  # Linux
+# Usage: ocrmypdf --force-ocr --deskew input.pdf output.pdf && pdftotext output.pdf -
 ```
 
 ### Extract text
@@ -59,6 +63,22 @@ with pdfplumber.open("file.pdf") as pdf:
     print(cropped.extract_text())
 ```
 
+## Diagrams and Figures
+
+Use `pdftoppm` to render PDF pages (including vector diagrams, schematics, block diagrams) to PNG, then view with the `read` tool:
+
+```bash
+pdftoppm -png -r 200 -f 11 -l 11 "file.pdf" /tmp/page    # render page 11 at 200 DPI
+# output: /tmp/page-11.png (or /tmp/page-0011.png depending on page count)
+```
+
+Use `-r 300` for fine-detail schematics. Comes with poppler (same as pdftotext).
+
+To extract only embedded raster images (photos, logos — not vector diagrams):
+```bash
+pdfimages -png -f 1 -l 5 "file.pdf" /tmp/img    # extract images from pages 1-5
+```
+
 ## When to use which
 
 | Task | Tool |
@@ -68,3 +88,5 @@ with pdfplumber.open("file.pdf") as pdf:
 | Extract tables | pdfplumber |
 | Get text coordinates | pdfplumber |
 | Encrypted PDFs | pdfplumber |
+| View diagrams/schematics | pdftoppm → read |
+| Extract embedded images | pdfimages |
