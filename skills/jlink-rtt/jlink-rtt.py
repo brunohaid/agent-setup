@@ -5,10 +5,26 @@ Reads RTT buffer directly via JLinkExe memory commands.
 """
 
 import argparse
+import os
 import re
+import shutil
 import subprocess
 import sys
 from pathlib import Path
+
+
+def find_jlink_exe() -> str:
+    """Find J-Link Commander across Unix and Windows installs."""
+    for name in ["JLinkExe", "JLink.exe"]:
+        path = shutil.which(name)
+        if path:
+            return path
+
+    windows_default = r"C:\Program Files\SEGGER\JLink\JLink.exe"
+    if os.name == "nt" and Path(windows_default).exists():
+        return windows_default
+
+    return "JLinkExe"
 
 def find_jlink_device() -> str | None:
     """Find JLINK_DEVICE from nearest Makefile."""
@@ -38,7 +54,7 @@ def run_jlink(device: str, commands: list[str]) -> str:
     """Run JLink commands."""
     script = "\n".join(commands + ["exit"])
     result = subprocess.run(
-        ["JLinkExe", "-Device", device, "-If", "SWD", "-Speed", "4000", "-AutoConnect", "1"],
+        [find_jlink_exe(), "-Device", device, "-If", "SWD", "-Speed", "4000", "-AutoConnect", "1"],
         input=script, capture_output=True, text=True, timeout=10
     )
     return result.stdout
@@ -46,10 +62,20 @@ def run_jlink(device: str, commands: list[str]) -> str:
 def parse_mem32(output: str) -> list[int]:
     """Parse mem32 output, collecting values from all lines."""
     values = []
+
+    # Keep the original parser first for macOS/Linux JLinkExe output.
     for line in output.split('\n'):
         if re.match(r'^[0-9A-Fa-f]{8}\s*=', line):
             for v in re.findall(r'([0-9A-Fa-f]{8})', line.split('=')[1]):
                 values.append(int(v, 16))
+
+    # Windows JLink.exe may prefix memory lines with "J-Link>"; fall back for that format only.
+    if not values:
+        for line in output.split('\n'):
+            if re.search(r'[0-9A-Fa-f]{8}\s*=', line):
+                for v in re.findall(r'\b([0-9A-Fa-f]{8})\b', line.split('=', 1)[1]):
+                    values.append(int(v, 16))
+
     return values
 
 def cmd_read(args):
@@ -74,7 +100,7 @@ def cmd_read(args):
     # Read buffer contents
     output = run_jlink(device, [f"mem {hex(buf_addr)} {buf_size}"])
     
-    # Parse hex dump to text
+    # Parse hex dump to text using the original parser first for macOS/Linux JLinkExe output.
     data = bytearray()
     for line in output.split('\n'):
         match = re.match(r'[0-9A-Fa-f]+\s*=\s*((?:[0-9A-Fa-f]{2}\s*)+)', line)
@@ -83,11 +109,25 @@ def cmd_read(args):
                 if len(b) == 2:
                     try: data.append(int(b, 16))
                     except: pass
+
+    # Windows JLink.exe may prefix memory lines with "J-Link>"; fall back for that format only.
+    if not data:
+        for line in output.split('\n'):
+            match = re.search(r'=\s*((?:[0-9A-Fa-f]{2}\s*)+)', line)
+            if match:
+                for b in match.group(1).split():
+                    if len(b) == 2:
+                        try: data.append(int(b, 16))
+                        except: pass
     
     # Print readable text
     text = bytes(data).decode('utf-8', errors='replace')
-    # Filter to printable + newlines
-    print(''.join(c for c in text if c.isprintable() or c in '\n\r\t'))
+    # Filter to printable + newlines, preserving original behavior except on Windows consoles.
+    clean = ''.join(c for c in text if c.isprintable() or c in '\n\r\t')
+    if os.name == "nt":
+        print(clean.encode(sys.stdout.encoding or 'utf-8', errors='ignore').decode(sys.stdout.encoding or 'utf-8', errors='ignore'))
+    else:
+        print(clean)
 
 def cmd_status(args):
     """Show RTT buffer status."""
