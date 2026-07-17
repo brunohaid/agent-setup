@@ -9,6 +9,8 @@ Skills and prompts for [pi](https://github.com/mariozechner/pi-coding-agent).
 | Skill | Description |
 |-------|-------------|
 | [pdf](skills/pdf/SKILL.md) | Extract text and tables from PDFs using pdftotext (simple) or pdfplumber (advanced) |
+| [saleae](skills/saleae/SKILL.md) | Capture, decode, export, and safely monitor signals with Saleae Logic 2, Automation, or MCP |
+| [segger](skills/segger/SKILL.md) | Read SEGGER RTT output through a serial-pinned J-Link using firmware build metadata |
 
 ### Prompts
 
@@ -71,6 +73,16 @@ ln -s ~/agent-setup/extensions/*.ts ~/.pi/agent/extensions/
 ```
 
 ## Usage
+
+### Saleae Skill
+
+The skill loads automatically for Saleae Logic tasks, or invoke it directly:
+
+```
+/skill:saleae
+```
+
+It documents when to use the Logic 2 UI versus Automation or MCP and includes capture-ownership guardrails.
 
 ### PDF Skill
 

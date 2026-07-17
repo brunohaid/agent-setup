@@ -1,9 +1,9 @@
 ---
-name: jlink-rtt
-description: Read RTT debug output through an explicitly selected J-Link probe using firmware map metadata.
+name: segger
+description: Read SEGGER RTT debug output through an explicitly selected J-Link probe using firmware map metadata.
 ---
 
-# J-Link RTT Skill
+# SEGGER Skill
 
 Use this fallback when Ozone is unavailable or SEGGER's RTT Logger/Client cannot discover the control block. It reads channel-zero metadata and ring-buffer bytes directly through J-Link Commander.
 
@@ -19,28 +19,28 @@ Use this fallback when Ozone is unavailable or SEGGER's RTT Logger/Client cannot
 
 ```bash
 # Spot through the LM20 DK onboard J-Link.
-python3 ~/agent-setup/skills/jlink-rtt/jlink-rtt.py \
+python3 ~/agent-setup/skills/segger/jlink-rtt.py \
   --project-dir lights/spot/main \
   --serial 1051861032 \
   status
-python3 ~/agent-setup/skills/jlink-rtt/jlink-rtt.py \
+python3 ~/agent-setup/skills/segger/jlink-rtt.py \
   --project-dir lights/spot/main \
   --serial 1051861032 \
   read
 
 # Shelf Distribution through the external Compact PLUS.
 # The exact STM device is discovered from MCU := STM32C562RE in its Makefile.
-python3 ~/agent-setup/skills/jlink-rtt/jlink-rtt.py \
+python3 ~/agent-setup/skills/segger/jlink-rtt.py \
   --project-dir cabinet/retail/shelfdistribution \
   --serial 853006444 \
   status
-python3 ~/agent-setup/skills/jlink-rtt/jlink-rtt.py \
+python3 ~/agent-setup/skills/segger/jlink-rtt.py \
   --project-dir cabinet/retail/shelfdistribution \
   --serial 853006444 \
   read
 
 # Override metadata only when automatic device discovery is unavailable.
-python3 ~/agent-setup/skills/jlink-rtt/jlink-rtt.py \
+python3 ~/agent-setup/skills/segger/jlink-rtt.py \
   --project-dir path/to/project \
   --device nRF54LM20A_M33 \
   --serial 1051861032 \
@@ -50,7 +50,7 @@ python3 ~/agent-setup/skills/jlink-rtt/jlink-rtt.py \
 On Windows, use the installed skill path, for example:
 
 ```bash
-python C:/Users/bruno/.pi/agent/git/github.com/brunohaid/agent-setup/skills/jlink-rtt/jlink-rtt.py \
+python C:/Users/bruno/.pi/agent/git/github.com/brunohaid/agent-setup/skills/segger/jlink-rtt.py \
   --project-dir C:/Users/bruno/meso/firmware/lights/spot/main \
   --device nRF54LM20A_M33 \
   --serial 1051861032 \
